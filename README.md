@@ -1,5 +1,12 @@
 # ScrapingBee MCP Server
 
+
+<p align="center">
+  <a href="[https://dashboard.scrapingbee.com/account/google_login](https://mcp.scrapingbee.com/)">
+<img width="2047" height="824" alt="image" src="https://github.com/user-attachments/assets/1232c689-5a4c-4554-ab8d-cc74520d3a87" />
+  </a>
+</p>
+
 A production-ready Model Context Protocol (MCP) server that enables AI agents to access structured web data using ScrapingBee as a tool.
 
 This project demonstrates how to transform ScrapingBee into an AI-native data layer. Instead of embedding scraping logic directly inside prompts, AI agents register ScrapingBee as a tool and request structured web data on demand.
