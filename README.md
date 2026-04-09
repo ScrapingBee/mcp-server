@@ -325,7 +325,7 @@ With this architecture you can:
 
 ## Conclusion
 
-The ScrapingBee MCP Server transforms web scraping into a structured, tool-driven data layer for AI systems.
+The [ScrapingBee MCP Server](https://mcp.scrapingbee.com/) transforms web scraping into a structured, tool-driven data layer for AI systems.
 
 Instead of brittle prompt scraping, you get:
 
