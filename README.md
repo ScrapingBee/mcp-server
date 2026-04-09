@@ -9,7 +9,7 @@
 
 A production-ready Model Context Protocol (MCP) server that enables AI agents to access structured web data using ScrapingBee as a tool.
 
-This project demonstrates how to transform ScrapingBee into an AI-native data layer. Instead of embedding scraping logic directly inside prompts, AI agents register ScrapingBee as a tool and request structured web data on demand.
+This project demonstrates how to transform [ScrapingBee](https://mcp.scrapingbee.com/) into an AI-native data layer. Instead of embedding scraping logic directly inside prompts, AI agents register ScrapingBee as a tool and request structured web data on demand.
 
 If you are building:
 
