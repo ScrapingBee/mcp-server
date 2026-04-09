@@ -335,3 +335,5 @@ Instead of brittle prompt scraping, you get:
 • Scalable tool orchestration  
 
 This is AI-native web data access.
+
+To start building AI-powered agents today, [Get your free API key](https://app.scrapingbee.com/account/register) and connect to the ScrapingBee MCP server in minutes.
