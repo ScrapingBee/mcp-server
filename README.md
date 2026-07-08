@@ -30,7 +30,7 @@ ai agent web scraping
 mcp web scraping tool  
 
 
-## What Is Model Context Protocol (MCP)?
+### What Is Model Context Protocol (MCP)?
 
 Model Context Protocol (MCP) defines how AI systems interact with external tools in a structured way.
 
