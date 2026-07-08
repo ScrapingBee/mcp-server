@@ -44,7 +44,7 @@ Instead of letting a language model guess how to scrape or browse the web, MCP a
 The ScrapingBee MCP server exposes web scraping capabilities as a formally registered tool that AI systems can use safely and predictably.
 
 
-## Why Use ScrapingBee with MCP?
+### Why Use ScrapingBee with MCP?
 
 AI models cannot reliably:
 
@@ -61,7 +61,7 @@ The MCP server acts as a bridge between your AI agent and ScrapingBee’s manage
 This enables true AI agent web scraping without fragile prompt-based hacks.
 
 
-## Architecture Overview
+### Architecture Overview
 
 AI Agent  
 → MCP Client  
@@ -76,7 +76,7 @@ It calls tools.
 The MCP server executes them.
 
 
-## Installation
+### Installation
 
 Clone the repository:
 
@@ -104,7 +104,7 @@ npm start
 ```
 
 
-## Connecting to the ScrapingBee MCP Server
+### Connecting to the ScrapingBee MCP Server
 
 You can connect in two ways:
 
@@ -135,7 +135,7 @@ This registers ScrapingBee as an MCP tool provider inside Claude Desktop.
 After restarting Claude, the tools become available automatically.
 
 
-## Option 2: Custom Python MCP Client
+### Option 2: Custom Python MCP Client
 
 For advanced AI workflows, you can build a minimal async MCP client using Python.
 
@@ -312,7 +312,7 @@ async def main():
     print(json.dumps(result, indent=2))
 ```
 
-## What This Enables
+### What This Enables
 
 With this architecture you can:
 
@@ -323,7 +323,7 @@ With this architecture you can:
 • Create scalable AI-native web scraping systems  
 
 
-## Conclusion
+### Conclusion
 
 The [ScrapingBee MCP Server](https://mcp.scrapingbee.com/) transforms web scraping into a structured, tool-driven data layer for AI systems.
 
