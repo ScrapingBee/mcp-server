@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="[https://dashboard.scrapingbee.com/account/google_login](https://mcp.scrapingbee.com/)">
-<img src="https://github.com/user-attachments/assets/7a07376f-cdda-4e3e-8056-15095ca80054" />
+<img src="https://github.com/user-attachments/assets/7a07376f-cdda-4e3e-8056-15095ca80054" alt="scrapingbee-mcp" />
   </a>
 </p>
 
