@@ -3,9 +3,12 @@
 
 <p align="center">
   <a href="[https://dashboard.scrapingbee.com/account/google_login](https://mcp.scrapingbee.com/)">
-<img width="2047" height="824" alt="image" src="https://github.com/user-attachments/assets/1232c689-5a4c-4554-ab8d-cc74520d3a87" />
+<img width="2047" height="824" alt="image" src="https://github.com/user-attachments/assets/7a07376f-cdda-4e3e-8056-15095ca80054" />
   </a>
 </p>
+
+
+
 
 A production-ready Model Context Protocol (MCP) server that enables AI agents to access structured web data using ScrapingBee as a tool.
 
