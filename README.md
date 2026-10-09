@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <a href="[https://dashboard.scrapingbee.com/account/google_login](https://mcp.scrapingbee.com/)">
+  <a href="https://mcp.scrapingbee.com/">
 <img src="https://github.com/user-attachments/assets/7a07376f-cdda-4e3e-8056-15095ca80054" alt="scrapingbee-mcp" />
   </a>
 </p>
@@ -24,6 +24,75 @@ If you are building:
 • AI-powered web scraping infrastructure  
 
 This repository provides a complete MCP integration blueprint.
+
+
+### Quick start
+
+The server is hosted by ScrapingBee at **`https://mcp.scrapingbee.com/mcp`** (Streamable HTTP) —
+there is nothing to install. You need a ScrapingBee API key
+([get one here](https://app.scrapingbee.com/account/manage/api_key); trial credits included),
+sent as the header `Authorization: Bearer <key>`. Registry name: `com.scrapingbee/mcp`.
+
+**Claude Code**
+
+```bash
+claude mcp add --transport http scrapingbee https://mcp.scrapingbee.com/mcp \
+  --header "Authorization: Bearer YOUR_API_KEY"
+```
+
+**Codex CLI**
+
+```bash
+codex mcp add scrapingbee --url https://mcp.scrapingbee.com/mcp \
+  --bearer-token-env-var SCRAPINGBEE_API_KEY
+```
+
+**Cursor, VS Code and other clients with a JSON config**
+
+```json
+{
+  "mcpServers": {
+    "scrapingbee": {
+      "url": "https://mcp.scrapingbee.com/mcp",
+      "headers": { "Authorization": "Bearer YOUR_API_KEY" }
+    }
+  }
+}
+```
+
+Also available through [Glama](https://glama.ai/mcp/connectors/com.scrapingbee.mcp/scraping-bee),
+[Smithery](https://smithery.ai/servers/scrapingbee/scrapingbee) and the
+[MCP Registry](https://registry.modelcontextprotocol.io).
+
+
+### Tools
+
+| Tool | What it does |
+|------|--------------|
+| `get_page_text` | Fetch a URL and return its content as text or markdown (JavaScript rendered, blocks handled) |
+| `get_page_html` | Fetch a URL and return the rendered HTML |
+| `get_screenshot` | Fetch a URL and return a screenshot |
+| `get_file` | Download a file (PDF, image, …) from a URL |
+| `extract_page_data` | Fetch a URL and extract specific data with CSS or XPath selectors |
+| `fast_search` | Fast web search returning clean organic results and top stories — the first choice for general searches |
+| `get_google_search_results` | Google SERP as JSON for specialised searches: news, maps, Lens, shopping, images, AI mode |
+| `get_amazon_search_results` | Amazon search results as JSON |
+| `get_amazon_product_details` | Amazon product details by ASIN |
+| `get_amazon_pricing` | Current Amazon price and seller offers by ASIN |
+| `get_walmart_search_results` | Walmart search results as JSON |
+| `get_walmart_product_details` | Walmart product details by ID |
+| `get_youtube_search_results` | YouTube search results |
+| `get_youtube_video_metadata` | Title, description, stats and more for a video |
+| `get_youtube_video_subtitles` | Subtitles / transcript for a video |
+| `ask_chatgpt` | Send a prompt to ChatGPT, optionally with web search |
+| `ask_gemini` | Send a prompt to Gemini, with citations when available |
+| `get_scrapingbee_usage` | Remaining credits and concurrency for your account |
+
+Each call consumes API credits exactly as the equivalent ScrapingBee API request would
+(see [pricing](https://www.scrapingbee.com/pricing/) and the
+[API documentation](https://www.scrapingbee.com/documentation/)). The server handles one page or
+query per call; for hundreds of URLs, crawling a site, writing results to files or scheduling
+recurring jobs, use the [ScrapingBee CLI](https://github.com/ScrapingBee/scrapingbee-cli).
 
 Relevant keywords:
 scrapingbee mcp  
@@ -81,29 +150,12 @@ The MCP server executes them.
 
 ### Installation
 
-Clone the repository:
-
-```bash
-git clone https://github.com/your-org/scrapingbee-mcp-server.git
-cd scrapingbee-mcp-server
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Set your API key:
+There is nothing to install or run: the server is operated by ScrapingBee at
+`https://mcp.scrapingbee.com/mcp`. The only setup is your API key, which every client below
+sends as a `Authorization: Bearer` header:
 
 ```bash
 export SCRAPINGBEE_API_KEY=your_api_key
-```
-
-Start the MCP server:
-
-```bash
-npm start
 ```
 
 
@@ -126,12 +178,19 @@ Add the ScrapingBee MCP server to your `claude_desktop_config.json` file:
       "command": "npx",
       "args": [
         "mcp-remote",
-        "https://mcp.scrapingbee.com/mcp?api_key=YOUR_API_KEY"
-      ]
+        "https://mcp.scrapingbee.com/mcp",
+        "--header",
+        "Authorization:${AUTH_HEADER}"
+      ],
+      "env": {
+        "AUTH_HEADER": "Bearer YOUR_API_KEY"
+      }
     }
   }
 }
 ```
+
+(The `AUTH_HEADER` variable works around `mcp-remote`'s handling of spaces in arguments.)
 
 This registers ScrapingBee as an MCP tool provider inside Claude Desktop.
 
@@ -167,10 +226,11 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 ```python
 class MCPClient:
     def __init__(self, base_url: str, api_key: str):
-        self.base_url = f"{base_url}?api_key={api_key}"
+        self.base_url = base_url
         self.session_id = None
         self.http_client = httpx.AsyncClient(timeout=300)
         self.headers = {
+            "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
             "Accept": "application/json, text/event-stream",
             "User-Agent": "Minimal-MCP-Client/1.0",
