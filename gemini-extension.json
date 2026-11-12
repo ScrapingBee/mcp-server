@@ -1,0 +1,23 @@
+{
+  "name": "scrapingbee",
+  "version": "1.0.0",
+  "description": "Official ScrapingBee MCP server: read web pages as text, HTML or a screenshot, extract fields with CSS or XPath selectors, and get Google, Amazon, Walmart, YouTube, ChatGPT and Gemini results as JSON.",
+  "settings": [
+    {
+      "name": "ScrapingBee API Key",
+      "description": "Your ScrapingBee API key. Get one at https://app.scrapingbee.com/account/manage/api_key",
+      "envVar": "SCRAPINGBEE_API_KEY",
+      "sensitive": true
+    }
+  ],
+  "mcpServers": {
+    "scrapingbee": {
+      "url": "https://mcp.scrapingbee.com/mcp",
+      "type": "http",
+      "headers": {
+        "Authorization": "Bearer ${SCRAPINGBEE_API_KEY}"
+      }
+    }
+  },
+  "contextFileName": "GEMINI.md"
+}
