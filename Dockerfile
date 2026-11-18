@@ -1,6 +1,7 @@
 # Local stdio launcher for the hosted ScrapingBee MCP server.
 # The container only forwards MCP requests to https://mcp.scrapingbee.com/mcp.
-FROM python:3.12-slim
+# Newest Python version tested in CI.
+FROM python:3.13-slim
 
 WORKDIR /app
 COPY pyproject.toml README.md LICENSE ./
