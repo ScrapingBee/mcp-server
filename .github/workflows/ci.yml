@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Oldest and newest supported (requires-python >= 3.10).
+        python-version: ["3.10", "3.13"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          activate-environment: true
+      - name: Install
+        run: uv pip install -e . pytest==8.3.5
+      - name: Unit tests
+        run: pytest -q tests
+      - name: Validate manifests
+        run: |
+          curl -fsSL -o /tmp/server.schema.json https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json
+          curl -fsSL -o /tmp/glama.schema.json https://glama.ai/mcp/schemas/server.json
+          uvx check-jsonschema@0.33.0 --schemafile /tmp/server.schema.json server.json
+          uvx check-jsonschema@0.33.0 --schemafile /tmp/glama.schema.json glama.json
+      - name: Introspect the hosted server through the launcher (no API key, no credits)
+        run: python tests/smoke_stdio.py
